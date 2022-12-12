@@ -72,9 +72,19 @@ ERS_API_DEFINE4DSFUNCTIONLINK(
 
 ERS_API char* WriteJsonString(void* jsonPointer, const char* inputstring, JSONContext* stateInstance)
 {
-	std::ofstream o("pretty.json");
-	o << std::setw(4) << inputstring << std::endl; //prettyfies and writes the contents of "input.json" to a new file named "pretty.json"
 
+	nlohmann::json* jsonFile = reinterpret_cast<nlohmann::json*>(jsonPointer);
+
+
+	for (auto& element : jsonFile->items())
+	{
+		std::ofstream o("pretty.json");
+		o << std::setw(4) << element.key() << " " << element.value() << std::endl; //prettifies and writes the contents of "input.json" to a new file named "pretty.json"
+	}
+
+
+
+	
 	return CopyString((inputstring)); //returns what was just written
 
 

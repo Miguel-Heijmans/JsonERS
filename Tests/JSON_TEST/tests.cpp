@@ -32,7 +32,7 @@ TEST_CASE("Loading ODBC Manager") {
 
         char* output5 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "WriteJsonString", "WriteJsonString", output, "lemon").Get();
         std::cout << output5 << "\n";
-        
+
     }
 }
 
