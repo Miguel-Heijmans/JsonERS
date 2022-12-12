@@ -17,7 +17,7 @@ TEST_CASE("Loading ODBC Manager") {
         ODBCLibrary = std::make_unique<Ers::Script4D::Tests::Script4DLibrary>("JSON");
 
 
-        void* output = ODBCLibrary->ExecuteFunction< void* (const char*, void*)>(executionType, "GetJsonString", "GetJsonString", "input.json").Get();
+        void* output = ODBCLibrary->ExecuteFunction< void* (const char*, void*)>(executionType, "GetJsonString", "GetJsonString", "john.json").Get();
         std::cout << output << "\n";
 
         void* output2 = ODBCLibrary->ExecuteFunction< void* (const char*, void*)>(executionType, "GetJsonString", "GetJsonString", "jan.json").Get();
@@ -27,8 +27,8 @@ TEST_CASE("Loading ODBC Manager") {
         char* output3 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "ValuePickerString", "ValuePickerString", output2, "joost").Get();
         std::cout << output3 << "\n";
 
-        //char* output4 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "ValuePickerString", "ValuePickerString", output, "markers").Get();
-        //std::cout << output4 << "\n";
+        char* output4 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "ValuePickerString", "ValuePickerString", output, "lemon").Get();
+        std::cout << output4 << "\n";
 
 
         

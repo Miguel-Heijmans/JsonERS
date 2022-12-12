@@ -4,11 +4,11 @@
 #include <vector>
 
 
-
+#include <memory>
 
 class JSONContext {
 public:
-	std::vector<nlohmann::json> jsonVector;
+	std::vector<std::unique_ptr<nlohmann::json>> jsonVector;
 
 };
 
@@ -26,15 +26,12 @@ ERS_API void* GetJsonString(const char* inputstring, JSONContext* stateInstance)
 
 	std::ifstream file_input(filepath);//reads the contents of the json file
 
-	nlohmann::json data = nlohmann::json::parse(file_input); //adds the fetched "input.json" to the local variable "data
-
-	stateInstance->jsonVector.push_back(data);
+	stateInstance->jsonVector.push_back(std::make_unique<nlohmann::json>(nlohmann::json::parse(file_input)));
 
 	
 
 
-
-	return &stateInstance->jsonVector.at(stateInstance->jsonVector.size() - 1); //returns the amount of different groups in the "input.json" file
+	return stateInstance->jsonVector.at(stateInstance->jsonVector.size() - 1).get(); //returns the amount of different groups in the "input.json" file 
 }
 
 
@@ -67,7 +64,7 @@ ERS_API_DEFINE4DSFUNCTIONLINK(
 
 ERS_API char* ValuePickerString(void* jsonPointer, const char* inputString, JSONContext* stateInstance) 
 {
-	nlohmann::json* jsonFile = (nlohmann::json*)jsonPointer;
+	nlohmann::json* jsonFile = reinterpret_cast<nlohmann::json*>(jsonPointer);
 
 
 	
