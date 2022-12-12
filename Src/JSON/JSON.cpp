@@ -31,7 +31,7 @@ ERS_API void* GetJsonString(const char* inputstring, JSONContext* stateInstance)
 	
 
 
-	return stateInstance->jsonVector.at(stateInstance->jsonVector.size() - 1).get(); //returns the amount of different groups in the "input.json" file 
+	return stateInstance->jsonVector.at(stateInstance->jsonVector.size() - 1).get(); //returns the amount of different groups in the json files
 }
 
 
@@ -43,14 +43,39 @@ ERS_API_DEFINE4DSFUNCTIONLINK(
 );
 
 
+ERS_API char* ValuePickerString(void* jsonPointer, const char* inputString, JSONContext* stateInstance)
+{
+	nlohmann::json* jsonFile = reinterpret_cast<nlohmann::json*>(jsonPointer);
 
 
-ERS_API char* WriteJsonString(const char* inputstring, JSONContext* stateInstance)
+
+
+	for (auto& element : jsonFile->items())
+	{
+		std::cout << element.key() << " " << element.value() << "\n";
+	}
+
+
+
+	return CopyString("hello");
+
+}
+
+ERS_API_DEFINE4DSFUNCTIONLINK(
+	ValuePickerString,
+	ValuePickerString,
+	Category, "picks value"
+);
+
+
+
+
+ERS_API char* WriteJsonString(void* jsonPointer, const char* inputstring, JSONContext* stateInstance)
 {
 	std::ofstream o("pretty.json");
 	o << std::setw(4) << inputstring << std::endl; //prettyfies and writes the contents of "input.json" to a new file named "pretty.json"
 
-	return CopyString((inputstring)); //returns the amount of different groups in the "input.json" file
+	return CopyString((inputstring)); //returns what was just written
 
 
 }
@@ -62,29 +87,6 @@ ERS_API_DEFINE4DSFUNCTIONLINK(
 );
 
 
-ERS_API char* ValuePickerString(void* jsonPointer, const char* inputString, JSONContext* stateInstance) 
-{
-	nlohmann::json* jsonFile = reinterpret_cast<nlohmann::json*>(jsonPointer);
-
-
-	
-
-	for (auto& element : jsonFile->items())
-	{
-		std::cout << element.key() << " " << element.value() << "\n";
-	}
-
-	
-
-	return CopyString("hello");
-
-}
-
-ERS_API_DEFINE4DSFUNCTIONLINK(
-	ValuePickerString,
-	ValuePickerString,
-	Category, "picks value"
-);
 
 
 

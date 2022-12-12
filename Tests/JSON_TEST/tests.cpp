@@ -30,7 +30,8 @@ TEST_CASE("Loading ODBC Manager") {
         char* output4 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "ValuePickerString", "ValuePickerString", output, "lemon").Get();
         std::cout << output4 << "\n";
 
-
+        char* output5 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "WriteJsonString", "WriteJsonString", output, "lemon").Get();
+        std::cout << output5 << "\n";
         
     }
 }
