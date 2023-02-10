@@ -56,7 +56,6 @@ ERS_API char* ValuePickerString(void* jsonPointer, const char* inputString, JSON
 	}
 
 
-
 	return CopyString("hello");
 
 }
@@ -75,17 +74,18 @@ ERS_API char* WriteJsonString(void* jsonPointer, const char* inputstring, JSONCo
 
 	nlohmann::json* jsonFile = reinterpret_cast<nlohmann::json*>(jsonPointer);
 
-
 	for (auto& element : jsonFile->items())
 	{
-		std::ofstream o("pretty.json");
-		o << std::setw(4) << element.key() << " " << element.value() << std::endl; //prettifies and writes the contents of "input.json" to a new file named "pretty.json"
+		std::ofstream o(inputstring, std::ios::app);
+		o << std::setw(4) << element.key() << " " << element.value() << "\n";
 	}
 
-
-
+	//std::ofstream o(inputstring,std::ios::app);
+	//o << std::setw(4) << *jsonFile << std::endl; 
 	
-	return CopyString((inputstring)); //returns what was just written
+
+
+	return CopyString("");
 
 
 }

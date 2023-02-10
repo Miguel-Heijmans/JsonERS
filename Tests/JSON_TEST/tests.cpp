@@ -20,17 +20,18 @@ TEST_CASE("Loading ODBC Manager") {
         void* output = ODBCLibrary->ExecuteFunction< void* (const char*, void*)>(executionType, "GetJsonString", "GetJsonString", "john.json").Get();
         std::cout << output << "\n";
 
-        void* output2 = ODBCLibrary->ExecuteFunction< void* (const char*, void*)>(executionType, "GetJsonString", "GetJsonString", "jan.json").Get();
+        void* output2 = ODBCLibrary->ExecuteFunction< void* (const char*, void*)>(executionType, "GetJsonString", "GetJsonString", "cow.json").Get();
         std::cout << output2 << "\n";
 
-
-        char* output3 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "ValuePickerString", "ValuePickerString", output2, "joost").Get();
+        
+        
+        char* output3 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "ValuePickerString", "ValuePickerString", output, "tiger").Get();
         std::cout << output3 << "\n";
 
-        char* output4 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "ValuePickerString", "ValuePickerString", output, "lemon").Get();
-        std::cout << output4 << "\n";
+        char* output4 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "ValuePickerString", "ValuePickerString", output2, "bison").Get();
+        std::cout << output4 << "\n"; 
 
-        char* output5 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "WriteJsonString", "WriteJsonString", output, "lemon").Get();
+        char* output5 = ODBCLibrary->ExecuteFunction< char* (void*, const char*, void*)>(executionType, "WriteJsonString", "WriteJsonString", output2, "merged.json").Get();
         std::cout << output5 << "\n";
 
     }
